@@ -22,6 +22,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		77E88BFB00341A9EE4217078 /* Pods_KZTracking_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8373EF787DF2E39E40539468 /* Pods_KZTracking_Tests.framework */; };
+		7C6E777F22FD5AB90065AC1F /* UIUIUIApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6E777E22FD5AB90065AC1F /* UIUIUIApplication.m */; };
 		7CF82B02C3A87636E36120E1 /* Pods_KZTracking_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43EAF1F2ABB4F3FCB364FAFE /* Pods_KZTracking_Example.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -37,10 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07456016120B84F469E57691 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		0ECD1C2D294416ABB6E9E979 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		07456016120B84F469E57691 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0ECD1C2D294416ABB6E9E979 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		10D0A40F6F24A2A6590840DB /* Pods-KZTracking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KZTracking_Example.release.xcconfig"; path = "Target Support Files/Pods-KZTracking_Example/Pods-KZTracking_Example.release.xcconfig"; sourceTree = "<group>"; };
-		19617512EDB4F355974F967D /* KZTracking.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = KZTracking.podspec; path = ../KZTracking.podspec; sourceTree = "<group>"; };
+		19617512EDB4F355974F967D /* KZTracking.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KZTracking.podspec; path = ../KZTracking.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		284D11767CA365D3905D15F2 /* Pods-KZTracking_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KZTracking_Example.debug.xcconfig"; path = "Target Support Files/Pods-KZTracking_Example/Pods-KZTracking_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		43EAF1F2ABB4F3FCB364FAFE /* Pods_KZTracking_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KZTracking_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* KZTracking_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KZTracking_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +65,8 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6851C7E236BCD08D6758EF83 /* Pods-KZTracking_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KZTracking_Tests.release.xcconfig"; path = "Target Support Files/Pods-KZTracking_Tests/Pods-KZTracking_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7C6E777D22FD5AB90065AC1F /* UIUIUIApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIUIUIApplication.h; sourceTree = "<group>"; };
+		7C6E777E22FD5AB90065AC1F /* UIUIUIApplication.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIUIUIApplication.m; sourceTree = "<group>"; };
 		8373EF787DF2E39E40539468 /* Pods_KZTracking_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KZTracking_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A83DB0DCC3EE604EDCCF2887 /* Pods-KZTracking_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KZTracking_Tests.debug.xcconfig"; path = "Target Support Files/Pods-KZTracking_Tests/Pods-KZTracking_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 			children = (
 				6003F59C195388D20070C39A /* KZAppDelegate.h */,
 				6003F59D195388D20070C39A /* KZAppDelegate.m */,
+				7C6E777D22FD5AB90065AC1F /* UIUIUIApplication.h */,
+				7C6E777E22FD5AB90065AC1F /* UIUIUIApplication.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* KZViewController.h */,
 				6003F5A6195388D20070C39A /* KZViewController.m */,
@@ -193,7 +198,6 @@
 				A83DB0DCC3EE604EDCCF2887 /* Pods-KZTracking_Tests.debug.xcconfig */,
 				6851C7E236BCD08D6758EF83 /* Pods-KZTracking_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -248,6 +252,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = gujianxing;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = AYDR2YFZ4K;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -258,6 +265,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -322,16 +330,14 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-KZTracking_Example/Pods-KZTracking_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/KZTracking/KZTracking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KZTracking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C6E777F22FD5AB90065AC1F /* UIUIUIApplication.m in Sources */,
 				6003F59E195388D20070C39A /* KZAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* KZViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
@@ -498,6 +505,7 @@
 			baseConfigurationReference = 284D11767CA365D3905D15F2 /* Pods-KZTracking_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AYDR2YFZ4K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KZTracking/KZTracking-Prefix.pch";
 				INFOPLIST_FILE = "KZTracking/KZTracking-Info.plist";
@@ -514,6 +522,7 @@
 			baseConfigurationReference = 10D0A40F6F24A2A6590840DB /* Pods-KZTracking_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = AYDR2YFZ4K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KZTracking/KZTracking-Prefix.pch";
 				INFOPLIST_FILE = "KZTracking/KZTracking-Info.plist";

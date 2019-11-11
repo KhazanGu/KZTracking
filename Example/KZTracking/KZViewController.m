@@ -7,8 +7,11 @@
 //
 
 #import "KZViewController.h"
+#import <AFNetworking/AFNetworking.h>
 
-@interface KZViewController ()
+#import "AFHTTPSessionManager+Tracking.h"
+
+@interface KZViewController ()<NSURLSessionTaskDelegate, NSURLSessionDelegate, NSURLSessionDataDelegate>
 
 @end
 
@@ -17,7 +20,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[AFHTTPSessionManager manager] GET:@"https://www.baidu.com" parameters:@{@"key":@"value"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"res");
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"err");
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -25,5 +34,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SwizzleManager : NSObject
 
++ (void)swizzledWithClass:(Class)class originalSelector:(SEL)originalSelector swizzledSelector:(SEL)swizzledSelector;
+
 @end
 
 NS_ASSUME_NONNULL_END
