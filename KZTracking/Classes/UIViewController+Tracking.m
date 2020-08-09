@@ -13,20 +13,25 @@
 
 
 + (void)load {
+    
     static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         
         [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(viewDidLoad) swizzledSelector:@selector(kz_viewDidLoad)];
+        
         [SwizzleManager swizzledWithClass:[self class] originalSelector:NSSelectorFromString(@"dealloc") swizzledSelector:@selector(kz_dealloc)];
         
         [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(viewDidAppear:) swizzledSelector:@selector(kz_viewDidAppear:)];
         
     });
+    
 }
 
 
 #pragma mark - Method Swizzling
 int activityControllers = 0;
+
 - (void)kz_viewDidLoad {
     NSString *className = NSStringFromClass([self class]);
     if (![className hasPrefix:@"KZ"]) {

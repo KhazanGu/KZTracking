@@ -5,13 +5,7 @@
 //  Created by Khazan on 2019/8/2.
 //
 
-
-
-#if __has_include(<AFNetworking/AFNetworking.h>)
 #import <AFNetworking/AFNetworking.h>
-#else
-#endif
-
 
 NS_ASSUME_NONNULL_BEGIN
 

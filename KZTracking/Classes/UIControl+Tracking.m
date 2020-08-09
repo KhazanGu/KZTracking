@@ -12,16 +12,21 @@
 @implementation UIControl (Tracking)
 
 + (void)load {
+    
     static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         
         [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(sendAction:to:forEvent:) swizzledSelector:@selector(kz_sendAction:to:forEvent:)];
         
     });
+    
 }
 
 - (void)kz_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event {
+    
     NSString *className = NSStringFromClass([target class]);
+    
     if (![className hasPrefix:@"KZ"]) {
         TLOG(@"《target:::%@》 to do 《action:::%@》 for 《event:::%@》", target, NSStringFromSelector(action), event);
     }

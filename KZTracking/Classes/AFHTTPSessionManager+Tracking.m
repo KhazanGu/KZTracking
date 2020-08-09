@@ -10,9 +10,7 @@
 #import "SwizzleManager.h"
 #import "KZTrackingMacros.h"
 
-
 @implementation AFHTTPSessionManager (Tracking)
-
 
 - (void)addLogWithURL:(NSString *)url parameters:(NSDictionary *)parameters task:(NSURLSessionTask *)task responseObject:(id)responseObject error:(NSError *)error requestTime:(double)requestTime {
     NSURLRequest *request = [task currentRequest];

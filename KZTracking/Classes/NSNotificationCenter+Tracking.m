@@ -8,19 +8,17 @@
 #import "NSNotificationCenter+Tracking.h"
 #import "SwizzleManager.h"
 #import "KZTrackingMacros.h"
+
 @implementation NSNotificationCenter (Tracking)
 
 + (void)load {
-    
-//    static dispatch_once_t onceToken;
-//    
-//    dispatch_once(&onceToken, ^{
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotification:) swizzledSelector:@selector(kz_postNotification:)];
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotificationName:object:) swizzledSelector:@selector(kz_postNotificationName:object:)];
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotificationName:object:userInfo:) swizzledSelector:@selector(kz_postNotificationName:object:userInfo:)];
-//    });
-    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotification:) swizzledSelector:@selector(kz_postNotification:)];
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotificationName:object:) swizzledSelector:@selector(kz_postNotificationName:object:)];
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(postNotificationName:object:userInfo:) swizzledSelector:@selector(kz_postNotificationName:object:userInfo:)];
+    });
 }
 
 

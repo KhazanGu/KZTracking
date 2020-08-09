@@ -21,7 +21,7 @@ DEPENDENCIES:
   - KZTracking (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
 
 EXTERNAL SOURCES:
@@ -34,4 +34,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3fbd379a894a5518aa299a9fa46725dfb08ac633
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1
