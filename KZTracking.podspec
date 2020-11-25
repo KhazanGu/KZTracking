@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KZTracking'
-  s.version          = '0.1.0'
+  s.version          = '0.0.1'
   s.summary          = 'A short description of KZTracking.'
 
 # This description is used to generate tags and improve search results.
@@ -29,15 +29,59 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
-  s.source_files = 'KZTracking/Classes/**/*'
   
+  s.subspec 'Basic' do |basic|
+      
+    basic.frameworks = 'UIKit'
+    basic.source_files = 'KZTracking/Classes/Basic/*'
+
+  end
+
+  s.subspec 'UIViewController' do |vc|
+      
+    vc.frameworks = 'UIKit'
+    vc.dependency 'Basic'
+    vc.source_files = 'KZTracking/Classes/UIViewController/*'
+
+  end
+
+  s.subspec 'UIControl' do |c|
+      
+    c.frameworks = 'UIKit'
+    c.dependency 'Basic'
+    c.source_files = 'KZTracking/Classes/UIControl/*'
+
+  end
+
+  s.subspec 'UIApplication' do |app|
+      
+    app.frameworks = 'UIKit'
+    app.dependency 'Basic'
+    app.source_files = 'KZTracking/Classes/UIApplication/*'
+
+  end
+
+  s.subspec 'NSNotificationCenter' do |noti|
+      
+    noti.frameworks = 'UIKit'
+    noti.dependency 'Basic'
+    noti.source_files = 'KZTracking/Classes/NSNotificationCenter/*'
+
+  end
+
+  s.subspec 'AFNetworking' do |afn|
+      
+    afn.frameworks = 'UIKit'
+    afn.dependency 'Basic'
+    afn.source_files = 'KZTracking/Classes/AFNetworking/*'
+
+  end
+
   # s.resource_bundles = {
   #   'KZTracking' => ['KZTracking/Assets/*.png']
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'AFNetworking'
-  
+  # s.dependency 'AFNetworking'
 end

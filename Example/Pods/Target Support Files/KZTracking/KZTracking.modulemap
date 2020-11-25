@@ -1,6 +1,0 @@
-framework module KZTracking {
-  umbrella header "KZTracking-umbrella.h"
-
-  export *
-  module * { export * }
-}
