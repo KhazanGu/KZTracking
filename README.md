@@ -20,9 +20,19 @@ it, simply add the following line to your Podfile:
 pod 'KZTracking'
 ```
 
+```ruby
+pod 'KZTracking', :path => '~/Desktop/KZTracking'
+```
+
+```ruby
+pod 'KZTracking/UIViewController', :path => '~/Desktop/KZTracking'
+```
+
+    
+
 ## Author
 
-gujianxing, Khazan.Gu@icloud.com
+Khazan, Khazan@foxmail.com
 
 ## License
 
