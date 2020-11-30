@@ -38,3 +38,4 @@ Carthage/Build
 Example/Pods/
 Example/Podfile.lock
 Example/KZTracking.xcworkspace/
+Example/.DS_Store
