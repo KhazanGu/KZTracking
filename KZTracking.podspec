@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/gujianxing/KZTracking.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   
   s.subspec 'Basic' do |basic|
       
@@ -69,11 +69,21 @@ TODO: Add long description of the pod here.
 
   end
 
-  s.subspec 'AFNetworking' do |afn|
+#  s.subspec 'AFNetworking_3' do |afn_3|
+#
+#    afn_3.frameworks = 'UIKit'
+#    afn_3.dependency 'Basic'
+#    afn_3.dependency 'AFNetworking', '~> 3.0'
+#    afn_3.source_files = 'KZTracking/Classes/AFNetworking_3/*'
+#
+#  end
+  
+  s.subspec 'AFNetworking_4' do |afn_4|
       
-    afn.frameworks = 'UIKit'
-    afn.dependency 'Basic'
-    afn.source_files = 'KZTracking/Classes/AFNetworking/*'
+    afn_4.frameworks = 'UIKit'
+    afn_4.dependency 'Basic'
+    afn_4.dependency 'AFNetworking', '~> 4.0'
+    afn_4.source_files = 'KZTracking/Classes/AFNetworking_4/*'
 
   end
 
@@ -83,5 +93,4 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking'
 end

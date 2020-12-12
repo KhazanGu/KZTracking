@@ -12,27 +12,27 @@
 @implementation NSURLSession (Tracking)
 
 
-//+ (void)load {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(dataTaskWithRequest:completionHandler:) swizzledSelector:@selector(kz_dataTaskWithRequest:completionHandler:)];
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(dataTaskWithURL:completionHandler:) swizzledSelector:@selector(kz_dataTaskWithURL:completionHandler:)];
-//
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(uploadTaskWithRequest:fromFile:completionHandler:) swizzledSelector:@selector(kz_uploadTaskWithRequest:fromFile:completionHandler:)];
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(uploadTaskWithRequest:fromData:completionHandler:) swizzledSelector:@selector(kz_uploadTaskWithRequest:fromData:completionHandler:)];
-//
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithRequest:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithRequest:completionHandler:)];
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithURL:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithURL:completionHandler:)];
-//
-//        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithResumeData:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithResumeData:completionHandler:)];
-//    });
-//}
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(dataTaskWithRequest:completionHandler:) swizzledSelector:@selector(kz_dataTaskWithRequest:completionHandler:)];
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(dataTaskWithURL:completionHandler:) swizzledSelector:@selector(kz_dataTaskWithURL:completionHandler:)];
+
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(uploadTaskWithRequest:fromFile:completionHandler:) swizzledSelector:@selector(kz_uploadTaskWithRequest:fromFile:completionHandler:)];
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(uploadTaskWithRequest:fromData:completionHandler:) swizzledSelector:@selector(kz_uploadTaskWithRequest:fromData:completionHandler:)];
+
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithRequest:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithRequest:completionHandler:)];
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithURL:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithURL:completionHandler:)];
+
+        [SwizzleManager swizzledWithClass:[self class] originalSelector:@selector(downloadTaskWithResumeData:completionHandler:) swizzledSelector:@selector(kz_downloadTaskWithResumeData:completionHandler:)];
+    });
+}
 
 
 - (NSURLSessionDataTask *)kz_dataTaskWithRequest:(NSURLRequest *)request completionHandler:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler {
