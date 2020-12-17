@@ -22,8 +22,6 @@ it, simply add the following line to your Podfile:
 pod 'KZTracking'
 ```
 
--->
-
 ```ruby
 pod 'KZTracking', :path => '~/Desktop/KZTracking'
 ```
@@ -32,7 +30,12 @@ pod 'KZTracking', :path => '~/Desktop/KZTracking'
 pod 'KZTracking/UIViewController', :path => '~/Desktop/KZTracking'
 ```
 
-    
+-->
+
+```ruby
+pod 'KZTracking', :git => 'https://github.com/KhazanGu/KZTracking.git'
+```
+
 
 ## Author
 
