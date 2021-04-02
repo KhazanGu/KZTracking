@@ -78,14 +78,14 @@ TODO: Add long description of the pod here.
 #
 #  end
   
-  s.subspec 'AFNetworking_4' do |afn_4|
-      
-    afn_4.frameworks = 'UIKit'
-    afn_4.dependency 'Basic'
-    afn_4.dependency 'AFNetworking', '~> 4.0'
-    afn_4.source_files = 'KZTracking/Classes/AFNetworking_4/*'
-
-  end
+#  s.subspec 'AFNetworking_4' do |afn_4|
+#      
+#    afn_4.frameworks = 'UIKit'
+#    afn_4.dependency 'Basic'
+#    afn_4.dependency 'AFNetworking', '~> 4.0'
+#    afn_4.source_files = 'KZTracking/Classes/AFNetworking_4/*'
+#
+#  end
 
   # s.resource_bundles = {
   #   'KZTracking' => ['KZTracking/Assets/*.png']
