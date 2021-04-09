@@ -79,7 +79,7 @@ TODO: Add long description of the pod here.
 #  end
   
 #  s.subspec 'AFNetworking_4' do |afn_4|
-#      
+#
 #    afn_4.frameworks = 'UIKit'
 #    afn_4.dependency 'Basic'
 #    afn_4.dependency 'AFNetworking', '~> 4.0'

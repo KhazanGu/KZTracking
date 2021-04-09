@@ -9,7 +9,7 @@
 #import <objc/runtime.h>
 #import "SwizzleManager.h"
 #import "KZTrackingMacros.h"
-
+#import "KZTracking.h"
 
 @implementation AFHTTPSessionManager (Tracking)
 
@@ -20,6 +20,19 @@
                  task:(NSURLSessionTask *)task
        responseObject:(id)responseObject
                 error:(NSError *)error requestTime:(double)requestTime {
+    
+    NSArray *igs = [[KZTracking sharedInstance] ignoreURLs];
+    __block BOOL ignore;
+    [igs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj hasPrefix:url]) {
+            ignore = YES;
+            *stop = YES;
+        }
+    }];
+    
+    if (ignore) {
+        return;
+    }
     
     NSURLRequest *request = [task currentRequest];
     
