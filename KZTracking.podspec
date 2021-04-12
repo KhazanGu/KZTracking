@@ -40,7 +40,7 @@ TODO: Add long description of the pod here.
   s.subspec 'UIViewController' do |vc|
       
     vc.frameworks = 'UIKit'
-    vc.dependency 'Basic'
+    vc.dependency 'KZTracking/Basic'
     vc.source_files = 'KZTracking/Classes/UIViewController/*'
 
   end
@@ -48,7 +48,7 @@ TODO: Add long description of the pod here.
   s.subspec 'UIControl' do |c|
       
     c.frameworks = 'UIKit'
-    c.dependency 'Basic'
+    c.dependency 'KZTracking/Basic'
     c.source_files = 'KZTracking/Classes/UIControl/*'
 
   end
@@ -56,7 +56,7 @@ TODO: Add long description of the pod here.
   s.subspec 'UIApplication' do |app|
       
     app.frameworks = 'UIKit'
-    app.dependency 'Basic'
+    app.dependency 'KZTracking/Basic'
     app.source_files = 'KZTracking/Classes/UIApplication/*'
 
   end
@@ -64,7 +64,7 @@ TODO: Add long description of the pod here.
   s.subspec 'NSNotificationCenter' do |noti|
       
     noti.frameworks = 'UIKit'
-    noti.dependency 'Basic'
+    noti.dependency 'KZTracking/Basic'
     noti.source_files = 'KZTracking/Classes/NSNotificationCenter/*'
 
   end
@@ -72,7 +72,7 @@ TODO: Add long description of the pod here.
 #  s.subspec 'AFNetworking_3' do |afn_3|
 #
 #    afn_3.frameworks = 'UIKit'
-#    afn_3.dependency 'Basic'
+#    afn_3.dependency 'KZTracking/Basic'
 #    afn_3.dependency 'AFNetworking', '~> 3.0'
 #    afn_3.source_files = 'KZTracking/Classes/AFNetworking_3/*'
 #
@@ -81,7 +81,7 @@ TODO: Add long description of the pod here.
   s.subspec 'AFNetworking_4' do |afn_4|
 
     afn_4.frameworks = 'UIKit'
-    afn_4.dependency 'Basic'
+    afn_4.dependency 'KZTracking/Basic'
     afn_4.dependency 'AFNetworking', '~> 4.0'
     afn_4.source_files = 'KZTracking/Classes/AFNetworking_4/*'
 
