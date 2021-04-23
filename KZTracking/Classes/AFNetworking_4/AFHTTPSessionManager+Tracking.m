@@ -39,17 +39,20 @@
     NSDate *atTime = [NSDate dateWithTimeIntervalSince1970:requestTime];
     double interval = [[NSDate date] timeIntervalSince1970] - requestTime;
     
+    NSMutableDictionary *HTTPRequestHeaders = [NSMutableDictionary dictionaryWithDictionary:[[AFHTTPRequestSerializer serializer] HTTPRequestHeaders]];
+    [HTTPRequestHeaders addEntriesFromDictionary:headers];
+    
     NSString *logging;
     
     if (error) {
         
-        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nerror:%@\nNSURLSession ===>>>", url, atTime, interval, method, headers, parameters, error];
+        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nerror:%@\nNSURLSession ===>>>", url, atTime, interval, method, [HTTPRequestHeaders copy], parameters, error];
         
     } else {
         
         id response = [self objectWithresponseObject:responseObject];
         
-        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nresponse:%@\nNSURLSession ===>>>", url, atTime, interval, method, headers, parameters, response];
+        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nresponse:%@\nNSURLSession ===>>>", url, atTime, interval, method, [HTTPRequestHeaders copy], parameters, response];
     }
     
     TLOG(@"%@", logging);
