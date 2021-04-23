@@ -39,7 +39,7 @@
     NSDate *atTime = [NSDate dateWithTimeIntervalSince1970:requestTime];
     double interval = [[NSDate date] timeIntervalSince1970] - requestTime;
     
-    NSMutableDictionary *HTTPRequestHeaders = [NSMutableDictionary dictionaryWithDictionary:[[AFHTTPRequestSerializer serializer] HTTPRequestHeaders]];
+    NSMutableDictionary *HTTPRequestHeaders = [NSMutableDictionary dictionaryWithDictionary:[self.requestSerializer HTTPRequestHeaders]];
     [HTTPRequestHeaders addEntriesFromDictionary:headers];
     
     NSString *logging;

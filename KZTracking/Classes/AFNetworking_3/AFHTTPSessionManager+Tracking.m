@@ -36,7 +36,7 @@
         return;
     }
     
-    NSDictionary *headers = [AFHTTPRequestSerializer serializer].HTTPRequestHeaders;
+    NSDictionary *headers = self.requestSerializer.HTTPRequestHeaders;
     
     NSDate *atTime = [NSDate dateWithTimeIntervalSince1970:requestTime];
     double interval = [[NSDate date] timeIntervalSince1970] - requestTime;
