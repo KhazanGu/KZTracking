@@ -69,6 +69,12 @@ TODO: Add long description of the pod here.
 
   end
 
+  s.subspec 'NSURLSession' do |urlsession|
+      urlsession.frameworks = 'UIKit'
+      urlsession.dependency 'KZTracking/Basic'
+      urlsession.source_files = 'KZTracking/Classes/NSURLSession/*'
+  end
+  
 #  s.subspec 'AFNetworking_3' do |afn_3|
 #
 #    afn_3.frameworks = 'UIKit'
@@ -79,14 +85,13 @@ TODO: Add long description of the pod here.
 #  end
   
   s.subspec 'AFNetworking_4' do |afn_4|
-
     afn_4.frameworks = 'UIKit'
     afn_4.dependency 'KZTracking/Basic'
     afn_4.dependency 'AFNetworking', '~> 4.0'
     afn_4.source_files = 'KZTracking/Classes/AFNetworking_4/*'
-
   end
 
+  
   # s.resource_bundles = {
   #   'KZTracking' => ['KZTracking/Assets/*.png']
   # }

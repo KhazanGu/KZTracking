@@ -10,16 +10,23 @@
 #import "SwizzleManager.h"
 #import "KZTrackingMacros.h"
 #import "KZTracking.h"
+#import <AFNetworking/AFNetworking.h>
 
 @implementation AFHTTPSessionManager (Tracking)
 
-
-- (void)addLogWithURL:(NSString *)url parameters:(NSDictionary *)parameters task:(NSURLSessionTask *)task responseObject:(id)responseObject error:(NSError *)error requestTime:(double)requestTime {
+- (void)formatLogWithURL:(NSString *)url
+                  method:(NSString *)method
+              parameters:(NSDictionary *)parameters
+          responseObject:(id)responseObject
+                   error:(NSError *)error
+             requestTime:(double)requestTime {
     
     NSArray *igs = [[KZTracking sharedInstance] ignoreURLs];
+    
     __block BOOL ignore;
+    
     [igs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj hasPrefix:url]) {
+        if ([url hasPrefix:obj]) {
             ignore = YES;
             *stop = YES;
         }
@@ -29,54 +36,39 @@
         return;
     }
     
-    NSURLRequest *request = [task currentRequest];
+    NSDictionary *headers = [AFHTTPRequestSerializer serializer].HTTPRequestHeaders;
     
-    NSString *method = request.HTTPMethod;
-    
-    NSDictionary *headerFields = [request allHTTPHeaderFields];
-    
-    double timeout = request.timeoutInterval;
-    
+    NSDate *atTime = [NSDate dateWithTimeIntervalSince1970:requestTime];
     double interval = [[NSDate date] timeIntervalSince1970] - requestTime;
     
     NSString *logging;
     
     if (error) {
         
-        logging = [NSString stringWithFormat:@"request <<<===\nurl:%@\nmethod:%@  timeout:%f  times:%f\nheaderFields:%@\nparameters:%@\nerror:%@\nrequest ===>>>", url, method, timeout, interval, headerFields, parameters, error];
+        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nerror:%@\nNSURLSession ===>>>", url, atTime, interval, method, headers, parameters, error];
         
     } else {
         
-        id responseBody = [self objectWithresponseObject:responseObject];
-
-        logging = [NSString stringWithFormat:@"request <<<===\nurl:%@\nmethod:%@  timeout:%f  times:%f\nheaderFields:%@\nparameters:%@\nresponse:%@\nrequest ===>>>", url, method, timeout, interval, headerFields, parameters, responseBody];
+        id response = [self objectWithresponseObject:responseObject];
+        
+        logging = [NSString stringWithFormat:@"NSURLSession <<<===\nurl:%@\natTime:%@ interval:%f\nmethod:%@\nheaderFields:%@\nparameters:%@\nresponse:%@\nNSURLSession ===>>>", url, atTime, interval, method, headers, parameters, response];
     }
     
     TLOG(@"%@", logging);
 }
 
 - (id)objectWithresponseObject:(id)responseObject {
+    
     if (responseObject == nil) {
         return nil;
     }
     
-    if (![responseObject isKindOfClass:[NSData class]]) {
-        return responseObject;
+    if ([responseObject isKindOfClass:[NSData class]]) {
+        return [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
     }
     
-    NSError *json_error;
-    
-    id obj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&json_error];
-    
-    if (json_error) {
-        
-        obj = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-    }
-    
-    return obj;
+    return responseObject;
 }
-
 
 + (void)load {
     static dispatch_once_t onceToken;
@@ -106,19 +98,22 @@
 }
 
 
-
-
 - (nullable NSURLSessionDataTask *)kz_GET:(NSString *)URLString
                             parameters:(nullable id)parameters
                                success:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success
                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure DEPRECATED_ATTRIBUTE {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_GET:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"GET" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"GET" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+        
         failure ? failure(task, error) : nil;
     }];
     
@@ -132,11 +127,16 @@
                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_GET:URLString parameters:parameters progress:downloadProgress success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"GET" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"GET" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -148,11 +148,16 @@
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_HEAD:URLString parameters:parameters success:^(NSURLSessionDataTask *task) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"HEAD" parameters:parameters responseObject:nil error:nil requestTime:requestTime];
+        
         success ? success(task) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"HEAD" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -164,11 +169,16 @@
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure DEPRECATED_ATTRIBUTE {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_POST:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -181,11 +191,16 @@
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_POST:URLString parameters:parameters progress:uploadProgress success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -198,11 +213,16 @@
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure DEPRECATED_ATTRIBUTE {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_POST:URLString parameters:parameters constructingBodyWithBlock:block success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -215,11 +235,16 @@
                                 failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_POST:URLString parameters:parameters constructingBodyWithBlock:block progress:uploadProgress success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"POST" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -231,11 +256,16 @@
                                failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_PUT:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"PUT" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"PUT" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -247,11 +277,16 @@
                                  failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_PATCH:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"PATCH" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"PATCH" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }
@@ -262,11 +297,16 @@
                                   failure:(nullable void (^)(NSURLSessionDataTask * _Nullable task, NSError *error))failure {
     
     NSTimeInterval requestTime = [[NSDate date] timeIntervalSince1970];
+    
     return [self kz_DELETE:URLString parameters:parameters success:^(NSURLSessionDataTask *task, id  _Nullable responseObject) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:responseObject error:nil requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"DELETE" parameters:parameters responseObject:responseObject error:nil requestTime:requestTime];
+        
         success ? success(task, responseObject) : nil;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError *error) {
-        [self addLogWithURL:URLString parameters:parameters task:task responseObject:nil error:error requestTime:requestTime];
+        
+        [self formatLogWithURL:URLString method:@"DELETE" parameters:parameters responseObject:nil error:error requestTime:requestTime];
+
         failure ? failure(task, error) : nil;
     }];
 }

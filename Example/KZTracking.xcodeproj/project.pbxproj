@@ -333,13 +333,11 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-KZTracking_Example/Pods-KZTracking_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/Basic/Basic.framework",
 				"${BUILT_PRODUCTS_DIR}/KZTracking/KZTracking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Basic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KZTracking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
